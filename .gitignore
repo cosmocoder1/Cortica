@@ -1,1 +1,39 @@
 __init__.py
+
+# Bytecode and Python junk
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtualenvs
+.env
+.venv
+env/
+venv/
+
+# Pipenv + Poetry
+Pipfile.lock
+
+# Mac-specific
+.DS_Store
+
+# Logs and outputs
+*.log
+*.tmp
+
+# Notebooks / temp analysis
+*.ipynb_checkpoints
+*.ipynb
+
+# PyCharm / VSCode project files
+.idea/
+.vscode/
+
+# Local data
+.cache/
+output/
+docs/site/
+
+# mkdocs build dir
+site/
