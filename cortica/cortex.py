@@ -10,42 +10,51 @@ Dependencies: None required to get started. Plug in embedding functions or stora
 """
 
 from typing import Any, List, Dict, Optional
-from .memory import MemoryGraph
-from .embed import DefaultEmbedder
+from cortica.memory import MemoryGraph
 
 
 class Cortex:
-    def __init__(self, embedder: Optional[Any] = None):
+    """
+    Cortex is a lightweight cognitive memory engine that stores and retrieves semantically embedded concepts.
+
+    It requires an embedding backend to function. You must provide an embedder with a callable:
+        embed(text: str) -> List[float]
+    """
+
+    def __init__(self, embedder: Any):
         """
-        Initialize the Cortex engine.
+        Initialize the Cortex engine with a required embedder.
 
         Args:
-            embedder (Optional[Any]): An optional embedding function/class with `embed(text: str) -> List[float]`.
+            embedder (Any): An embedding interface with `.embed(text: str) -> List[float]`
         """
+        if embedder is None:
+            raise ValueError("Cortex requires an embedder. None was provided.")
+
         self.memory = MemoryGraph(use_decay=True, decay_half_life=3600)
-        self.embedder = embedder or DefaultEmbedder()
+        self.embedder = embedder
 
     def remember(self, concept: str, metadata: Optional[Dict[str, Any]] = None):
         """
         Store a concept node in memory.
 
         Args:
-            concept (str): The core idea or content to store.
-            metadata (dict, optional): Additional metadata (timestamp, source, etc.)
+            concept (str): The idea or insight to store.
+            metadata (dict, optional): Extra info such as timestamp, source, or tags.
         """
-        embedding = self.embedder.embed(concept)
+        embedding = self.embedder.embed_query(concept)
         self.memory.store(concept, embedding, metadata)
 
-    def query(self, prompt: str, top_k: int = 5) -> List[Dict[str, Any]]:
+    def recall(self, prompt: str, top_k: int = 5) -> List[Dict[str, Any]]:
         """
-        Retrieve the most relevant memories for a given prompt.
+        Retrieve the most relevant memories to a query prompt.
 
         Args:
-            prompt (str): A search query or input string.
-            top_k (int): Number of top results to return.
+            prompt (str): A semantic query or question.
+            top_k (int): Number of closest matches to return.
 
         Returns:
-            List[Dict[str, Any]]: Retrieved memory nodes with content and metadata.
+            List[Dict[str, Any]]: Ranked concepts with similarity scores and metadata.
         """
-        embedding = self.embedder.embed(prompt)
+        embedding = self.embedder.embed_query(prompt)
         return self.memory.retrieve(embedding, top_k=top_k)

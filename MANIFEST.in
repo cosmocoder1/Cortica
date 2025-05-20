@@ -1,0 +1,5 @@
+# MANIFEST.in for Cortica
+# Ensures key metadata files are included in source distributions
+
+include README.md
+include LICENSE
