@@ -34,6 +34,3 @@ Pipfile.lock
 .cache/
 output/
 docs/site/
-
-# mkdocs build dir
-site/
