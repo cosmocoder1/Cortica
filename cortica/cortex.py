@@ -1,24 +1,28 @@
 """
-Cortex: High-level memory engine interface for semantic storage and retrieval.
+Cortex: Lightweight semantic memory engine for storing and retrieving past user inputs.
 
-This module acts as the public API for Cortica, allowing clients to:
-- Store concept nodes with metadata or embeddings
-- Query memory based on semantics, string keys, or context
-- Integrate with external tools like LangChain, RAG pipelines, or custom NLP flows
+This module provides a simple API for:
+- Storing user messages with vector embeddings
+- Retrieving the most relevant prior messages given a new query
+- Generating compressed context blocks to augment LLM prompts
 
-Dependencies: None required to get started. Plug in embedding functions or storage layers as needed.
+Designed for use in chatbots, journaling apps, support agents, and RAG-style workflows.
+
+Dependencies:
+- Requires a user-supplied embedder with: embed_query(text: str) -> List[float]
+- No NLP or tagging required. All memory is handled via vector similarity.
 """
 
-from typing import Any, List, Dict, Optional
+
+import textwrap
+from typing import Any, List, Dict
 from cortica.memory import MemoryGraph
 
 
 class Cortex:
     """
-    Cortex is a lightweight cognitive memory engine that stores and retrieves semantically embedded concepts.
-
-    It requires an embedding backend to function. You must provide an embedder with a callable:
-        embed(text: str) -> List[float]
+    Cortex is a minimal short-term memory module that stores user messages
+    and retrieves relevant ones to provide compressed prompt context to an LLM.
     """
 
     def __init__(self, embedder: Any):
@@ -26,35 +30,76 @@ class Cortex:
         Initialize the Cortex engine with a required embedder.
 
         Args:
-            embedder (Any): An embedding interface with `.embed(text: str) -> List[float]`
+            embedder (Any): An object with `embed_query(text: str) -> List[float]`
         """
         if embedder is None:
             raise ValueError("Cortex requires an embedder. None was provided.")
 
-        self.memory = MemoryGraph(use_decay=True, decay_half_life=3600)
+        self.memory = MemoryGraph()
         self.embedder = embedder
 
-    def remember(self, concept: str, metadata: Optional[Dict[str, Any]] = None):
+    def remember(self, text: str):
         """
-        Store a concept node in memory.
+        Stores a user input and its embedding in memory.
+        """
+        embedding = self.embedder.embed_query(text)
+        self.memory.store(
+            memory_text=text,
+            embedding=embedding,
+            metadata={"source": "user", "content": text}
+        )
+
+    def recall(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """
+        Retrieve the top-k most relevant memories to the current query.
+        """
+        query_vector = self.embedder.embed_query(query)
+        results = self.memory.retrieve(query_vector, top_k=top_k)
+        return [r.metadata for r in results]
+
+    def build_context_prompt(self, query: str, top_k: int = 5, width: int = 120, max_tokens: int = 800) -> str:
+        """
+        Build a context block for an LLM based on prior relevant user messages,
+        constrained by a maximum token budget.
 
         Args:
-            concept (str): The idea or insight to store.
-            metadata (dict, optional): Extra info such as timestamp, source, or tags.
-        """
-        embedding = self.embedder.embed_query(concept)
-        self.memory.store(concept, embedding, metadata)
-
-    def recall(self, prompt: str, top_k: int = 5) -> List[Dict[str, Any]]:
-        """
-        Retrieve the most relevant memories to a query prompt.
-
-        Args:
-            prompt (str): A semantic query or question.
-            top_k (int): Number of closest matches to return.
+            query (str): The user's current prompt.
+            top_k (int): Maximum number of memories to consider.
+            width (int): Character width limit per memory.
+            max_tokens (int): Total token budget for the context block.
 
         Returns:
-            List[Dict[str, Any]]: Ranked concepts with similarity scores and metadata.
+            str: LLM-ready prompt context string.
         """
-        embedding = self.embedder.embed_query(prompt)
-        return self.memory.retrieve(embedding, top_k=top_k)
+        recalled = self.recall(query, top_k=top_k)
+
+        context_lines = []
+        used_tokens = 0
+
+        for metadata in recalled:
+            content = metadata.get("content", "[no content]")
+            summary = textwrap.shorten(content, width=width, placeholder="...")
+            token_count = self.estimate_tokens(summary)
+
+            if used_tokens + token_count > max_tokens:
+                break
+
+            context_lines.append(f"- {summary}")
+            used_tokens += token_count
+
+        context_block = "\n".join(context_lines)
+        return (
+            "### Prior User Context\n"
+            "The following entries summarize what the user has previously communicated. "
+            "Use this context to respond in an informed, user-specific fashion.\n\n"
+            f"{context_block}\n"
+        )
+
+    @staticmethod
+    def estimate_tokens(text: str) -> int:
+        """
+        Estimate token count based on average token-to-character ratio (~1 token ≈ 4 characters).
+        """
+        return max(1, len(text) // 4)
+
+
