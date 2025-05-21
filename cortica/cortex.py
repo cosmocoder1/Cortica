@@ -25,7 +25,7 @@ class Cortex:
     and retrieves relevant ones to provide compressed prompt context to an LLM.
     """
 
-    def __init__(self, embedder: Any):
+    def __init__(self, embedder: Any) -> None:
         """
         Initialize the Cortex engine with a required embedder.
 
@@ -101,5 +101,3 @@ class Cortex:
         Estimate token count based on average token-to-character ratio (~1 token ≈ 4 characters).
         """
         return max(1, len(text) // 4)
-
-

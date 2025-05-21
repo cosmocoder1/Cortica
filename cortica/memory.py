@@ -28,7 +28,12 @@ class MemoryGraph:
     def __init__(self):
         self.memories: List[MemoryNode] = []
 
-    def store(self, memory_text: str, embedding: List[float], metadata: Optional[Dict[str, any]] = None):
+    def store(
+        self,
+        memory_text: str,
+        embedding: List[float],
+        metadata: Optional[Dict[str, any]] = None
+    ):
         memory = MemoryNode(
             content=memory_text,
             vector=tuple(embedding),
@@ -36,7 +41,11 @@ class MemoryGraph:
         )
         self.memories.append(memory)
 
-    def retrieve(self, query_embedding: List[float], top_k: int = 5) -> List[MemoryNode]:
+    def retrieve(
+        self,
+        query_embedding: List[float],
+        top_k: int = 5
+    ) -> List[MemoryNode]:
         scored = []
         for mem in self.memories:
             score = self.cosine_similarity(query_embedding, mem.vector)
