@@ -92,7 +92,7 @@ No database dependencies.
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/yourusername/Cortica.git
+git clone https://github.com/cosmocoder1/Cortica.git
 cd Cortica
 pip install -e .
 ```
