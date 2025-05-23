@@ -14,7 +14,7 @@ No tagging, concept graphs, or NLP dependencies — designed for fast, semantic 
 
 import math
 from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Optional, Tuple
 
 
 @dataclass(frozen=True)

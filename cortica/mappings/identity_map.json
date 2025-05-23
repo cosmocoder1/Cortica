@@ -1,0 +1,149 @@
+{
+  "name": [
+    "my name is",
+    "i'm called",
+    "this is",
+    "you can call me",
+    "i go by",
+    "i am"
+  ],
+  "location": [
+    "i live in",
+    "i'm from",
+    "based in",
+    "i moved to",
+    "currently in"
+  ],
+  "interests": [
+    "i love",
+    "i enjoy",
+    "i like",
+    "i'm into",
+    "i'm passionate about",
+    "i spend time on",
+    "i'm interested in"
+  ],
+  "occupation": [
+    "i work as",
+    "i'm a",
+    "my job is",
+    "i do",
+    "i'm employed as",
+    "i freelance as",
+    "i'm self-employed"
+  ],
+  "relationship_status": [
+    "i'm married",
+    "i have a partner",
+    "i'm single",
+    "i'm dating",
+    "i broke up with",
+    "i'm divorced"
+  ],
+  "education": [
+    "i studied",
+    "i have a degree in",
+    "i went to school for",
+    "i graduated from",
+    "i went to college at"
+  ],
+  "family": [
+    "i have a son",
+    "i have a daughter",
+    "i'm a parent",
+    "i have kids",
+    "my husband",
+    "my wife",
+    "my sibling",
+    "my brother",
+    "my sister"
+  ],
+  "age": [
+    "i'm",
+    "i am",
+    "i turned",
+    "i'm turning"
+  ],
+  "language": [
+    "i speak",
+    "my native language is",
+    "i'm fluent in",
+    "i grew up speaking"
+  ],
+  "health": [
+    "i have anxiety",
+    "i'm dealing with depression",
+    "i struggle with sleep",
+    "i have adhd",
+    "i’ve been feeling sick",
+    "i have a diagnosis of"
+  ],
+  "goals": [
+    "i want to",
+    "i hope to",
+    "i plan to",
+    "i'm working on",
+    "my goal is",
+    "i'm trying to"
+  ],
+  "values": [
+    "i believe in",
+    "i care about",
+    "i value",
+    "i think it's important to",
+    "i stand for"
+  ],
+  "beliefs": [
+    "i'm religious",
+    "i believe in god",
+    "i'm an atheist",
+    "i'm spiritual",
+    "i was raised christian",
+    "i practice buddhism"
+  ],
+  "politics": [
+    "i vote",
+    "i'm liberal",
+    "i'm conservative",
+    "i support",
+    "i care about policy",
+    "i’m apolitical"
+  ],
+  "pets": [
+    "i have a dog",
+    "i have a cat",
+    "my pet",
+    "i love animals",
+    "my dog",
+    "my cat"
+  ],
+  "tech": [
+    "i'm a developer",
+    "i work in tech",
+    "i build software",
+    "i code",
+    "i'm an engineer"
+  ],
+  "finance": [
+    "i'm trying to save money",
+    "i struggle with budgeting",
+    "i'm in debt",
+    "i want financial freedom",
+    "i invested in"
+  ],
+  "travel": [
+    "i love traveling",
+    "i just got back from",
+    "i'm planning a trip to",
+    "i went to",
+    "i moved to"
+  ],
+  "personality": [
+    "i’m introverted",
+    "i’m extroverted",
+    "i’m very sensitive",
+    "i’m very logical",
+    "i’m laid back",
+    "i’m type a"
+  ]
+}
