@@ -1,5 +1,4 @@
-"""
-setup.py for Cortica
+"""Cortica Setup.
 
 This file defines the package metadata and installation logic for Cortica,
 a lightweight cognitive memory engine for semantic storage, decay-aware retrieval,
@@ -7,7 +6,7 @@ and conceptual traversal. Designed to be portable and plug-and-play, Cortica
 can integrate with AI pipelines, RAG systems, or standalone reasoning tools.
 """
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="cortica",
