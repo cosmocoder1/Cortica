@@ -9,10 +9,22 @@ Use it to give *semantic memory* to chatbots, agents, or RAG systems — no tagg
 
 ## 🚀 What Cortica Does
 
-* Stores user messages with vector embeddings
-* Recalls the most relevant past messages for a new query
-* Builds clean, token-aware context blocks to inject into LLM prompts
-* Keeps your agent **on track**, even across drifting conversations
+- Stores user messages with vector embeddings  
+- Recalls the most relevant past messages for a new query  
+- Builds clean, token-aware context blocks to inject into LLM prompts  
+- Tracks **conversational tone over time** to help LLMs respond more intuitively  
+- Keeps your agent **on track**, even across drifting conversations  
+
+---
+
+## ✨ Features
+
+- **Memory Storage** — Store user utterances and metadata  
+- **Semantic Recall** — Retrieve past context via cosine similarity  
+- **LLM-Ready Prompts** — Structured context blocks with token trimming  
+- **Tone Tracking** — Capture average valence/arousal over recent messages  
+- **Token Budgeting** — Avoid prompt overflow with dynamic limits  
+- **Plug & Play** — Works with OpenAI, HuggingFace, or custom embedders  
 
 ---
 
@@ -50,16 +62,28 @@ cortex.remember("I already submitted a return request yesterday.")
 # Build context for the assistant to use in its next LLM call
 
 context = cortex.build_context_prompt("Can you check the status of my return?")
-
+```
 Example output:
 
+```
+You're speaking with a user.
+
 ### Prior User Context
-The following entries summarize what the user has previously communicated.
+These are the latest communications they've sent you.
 Use this context to respond in an informed, user-specific fashion.
 
-- My order arrived damaged.
-- I already submitted a return request yesterday.
+- I already submitted a return request yesterday. (1 min ago)
+- I'm hoping to get a replacement quickly. (1 min ago)
+- I ordered a coffee machine but it arrived damaged. (1 min ago)
+- I love how fast your shipping usually is though! (1 min ago)
+- My name is Sarah and I live in Chicago. (1 min ago)
 
+### Conversational Tone Summary (across time)
+These represent average emotional tone trends across three time horizons:
+- **Last 2 messages**: valence=+0.50, arousal=+0.50
+- **Last 10 messages**: valence=+0.20, arousal=+0.20
+- **Overall**: valence=+0.20, arousal=+0.20
+Use these to understand how the user's tone may be shifting over time so that you can be more adaptive in your communication.
 ```
 ---
 
@@ -76,16 +100,6 @@ def embed_query(text: str) -> List[float]
 No tagging.
 No NLP pipelines.
 No database dependencies.
-
----
-
-## ✨ Features
-
-* **Memory Storage** — Store user utterances and metadata
-* **Semantic Recall** — Retrieve past context via cosine similarity
-* **LLM-Ready Prompts** — Structured context blocks with token trimming
-* **Token Budgeting** — Avoid prompt overflow with dynamic limits
-* **Plug & Play** — Works with OpenAI, HuggingFace, or custom embedders
 
 ---
 

@@ -1,0 +1,57 @@
+{
+  "valence": {
+    "positive": [
+      "happy", "love", "excited", "great", "thankful", "awesome", "good", "relieved", "hopeful",
+      "grateful", "pleasant", "cool", "appreciate", "enjoy", "satisfied", "like", "peaceful",
+      "inspired", "encouraged", "kind", "friendly", "fun", "cheerful", "amazing", "wonderful",
+      "glad", "brilliant", "nice", "sweet", "warm", "uplifting", "joyful", "motivated", "playful",
+      "delighted", "fulfilled", "healed", "sparkling", "supportive", "thoughtful", "exciting",
+      "generous", "energized", "laughing", "giggly", "blessed", "beautiful", "blissful", "heartfelt",
+      "awesome", "trusting", "content", "recharged", "enthusiastic", "stable", "grounded", "secure",
+      "vibrant", "free", "appreciated", "centered", "respected", "thankful", "valued", "connected",
+      "curious", "creative", "balanced", "rested", "clean", "funny", "welcomed", "seen", "cared for",
+      "empowered", "capable", "joyous", "harmonious", "charming", "delightful", "confident",
+      "affectionate", "open", "included", "celebrated", "helpful", "peaceful", "resilient",
+      "encouraging", "secure", "compassionate", "silly", "loving", "admired", "adored", "sunny"
+    ],
+    "negative": [
+      "angry", "frustrated", "hate", "annoyed", "bad", "terrible", "disappointed", "upset", "anxious",
+      "worried", "sad", "tired", "exhausted", "overwhelmed", "resent", "mad", "nervous", "stupid",
+      "useless", "disgusted", "unfair", "stressed", "alone", "ignored", "hurt", "bitter", "hopeless",
+      "ashamed", "helpless", "insecure", "trapped", "jealous", "embarrassed", "abandoned", "shaky",
+      "afraid", "apathetic", "rejected", "grumpy", "tense", "angst", "horrible", "dreadful", "lost",
+      "mean", "angsty", "weepy", "uncomfortable", "triggered", "moody", "cold", "isolated",
+      "pessimistic", "critical", "sensitive", "guilty", "blamed", "exposed", "vulnerable", "ignored",
+      "uncertain", "unsure", "misunderstood", "ashamed", "cowardly", "defensive", "invisible",
+      "failing", "crushed", "toxic", "judged", "numb", "misled", "provoked", "rejected", "jittery",
+      "annoyed", "panicked", "worthless", "heavy", "devastated", "discouraged", "shamed", "resentful",
+      "shaky", "frazzled", "conflicted", "repetitive", "torn", "troubled", "meltdown", "melancholy"
+    ]
+  },
+  "arousal": {
+    "high": [
+      "urgent", "excited", "energized", "rushed", "furious", "panicked", "alert", "stimulated",
+      "hyped", "tense", "heated", "agitated", "bothered", "restless", "wired", "frantic", "intense",
+      "buzzing", "explosive", "fast", "active", "hyper", "chaotic", "anxious", "pressured",
+      "amped", "on edge", "shouting", "screaming", "quick", "accelerated", "vibrating", "stirred",
+      "dramatic", "electric", "reckless", "raging", "bouncing", "volatile", "jerky", "spinning",
+      "stormy", "urgent", "dizzy", "off balance", "boiling", "jumpy", "erratic", "twitchy", "charged",
+      "blaring", "surging", "exploding", "pumped", "jolted", "amped up", "electrified", "buzzed",
+      "clenched", "booming", "intense", "surprised", "alarmed", "startled", "shocked", "outraged",
+      "impulsive", "thrilled", "obsessed", "provoked", "sprinting", "yelling", "aggressive",
+      "radiating", "sizzling", "wound up", "maxed out", "zipping", "amped", "rowdy", "frenzied",
+      "hypnotic", "hypomanic", "spurred", "bursting", "triggered", "alerted", "crackling"
+    ],
+    "low": [
+      "calm", "relaxed", "slow", "tired", "sleepy", "quiet", "low energy", "bored", "numb", "still",
+      "chill", "peaceful", "apathetic", "lethargic", "exhausted", "drained", "passive", "dull",
+      "sluggish", "mellow", "blank", "mute", "quiet", "flat", "soft", "gentle", "sedated", "grounded",
+      "detached", "slow paced", "neutral", "cozy", "easy", "light", "disengaged", "absent", "mute",
+      "inert", "disconnected", "slowed", "inactive", "drowsy", "foggy", "shut down", "napping",
+      "sleeping", "resting", "pacing", "wandering", "zoned out", "dimming", "subdued", "heavy",
+      "floaty", "settled", "limp", "still", "dim", "spaced", "coasting", "unmoved", "apathetic",
+      "idle", "emotionless", "cold", "stable", "flatline", "fading", "lukewarm", "cool", "uninspired",
+      "low key", "bland", "worn", "cloudy", "slow burn", "cushioned", "coasting"
+    ]
+  }
+}
