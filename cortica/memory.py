@@ -17,20 +17,35 @@ from dataclasses import dataclass, field
 
 @dataclass(frozen=True)
 class MemoryNode:
+    """Represents a single memory with content, embedding vector, and metadata.
+
+    Used to store individual user messages or facts in the memory graph.
+    Each node includes:
+    - `content`: The original message or text snippet.
+    - `vector`: A semantic embedding of the content for similarity retrieval.
+    - `metadata`: Optional dictionary containing source info, tone, timestamp, etc.
+    """
     content: str
     vector: tuple[float, ...]
     metadata: dict[str, any] = field(default_factory=dict, compare=False)
 
 
 class MemoryGraph:
-    def __init__(self):
+    """Lightweight memory store for user messages and their semantic embeddings.
+
+    Manages short-term memory as a list of MemoryNodes, each containing message text,
+    vector embeddings, and optional metadata (e.g., timestamp, tone). Supports appending
+    new memories and retrieving the most relevant ones via vector similarity.
+    Designed for fast, in-memory access in LLM context construction pipelines.
+    """
+    def __init__(self) -> None:
         self.memories: list[MemoryNode] = []
 
     def store(
-            self,
-            memory_text: str,
-            embedding: list[float],
-            metadata: dict[str, any] | None = None
+        self,
+        memory_text: str,
+        embedding: list[float],
+        metadata: dict[str, any] | None = None
     ) -> None:
         """Store a new memory node containing the user message and its embedding.
 
@@ -47,9 +62,9 @@ class MemoryGraph:
         self.memories.append(memory)
 
     def retrieve(
-            self,
-            query_embedding: list[float],
-            top_k: int = 5
+        self,
+        query_embedding: list[float],
+        top_k: int = 5
     ) -> list[MemoryNode]:
         """Retrieve the top-k most relevant memories based on cosine similarity.
 
